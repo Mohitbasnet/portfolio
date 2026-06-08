@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanskriti Thapa | Full Stack Development Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #4f8ef7;
+      --accent-light: #e8f0fe;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #fafafa;
+      --white: #ffffff;
+      --section-gap: 80px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.75rem 0;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 2rem 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.15;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .tag {
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* SECTION LAYOUT */
+    .section-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--section-gap) 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 2rem;
+    }
+
+    /* EXPLANATION CARD */
+    .explanation-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .explanation-card h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+    .explanation-card p, .explanation-card li {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .explanation-card ul { padding-left: 1.2rem; }
+    .explanation-card li { margin-bottom: 0.3rem; }
+
+    /* DEMO CARD */
+    .demo-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .demo-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 500;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: #f9fafb;
+    }
+    .demo-body { padding: 1.5rem; }
+
+    /* ---- SECTION 1: FULL STACK ---- */
+    .stack-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .stack-layer {
+      border-radius: 8px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stack-layer .layer-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .stack-layer .layer-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+    .stack-layer .layer-info p { font-size: 0.8rem; margin: 0; }
+    .layer-frontend { background: #e8f0fe; }
+    .layer-frontend .layer-icon { background: #4f8ef7; color: white; }
+    .layer-frontend h4 { color: #1a4fa8; }
+    .layer-frontend p { color: #3b5ea6; }
+    .layer-backend { background: #fef3c7; }
+    .layer-backend .layer-icon { background: #f59e0b; color: white; }
+    .layer-backend h4 { color: #92400e; }
+    .layer-backend p { color: #b45309; }
+    .layer-database { background: #dcfce7; }
+    .layer-database .layer-icon { background: #22c55e; color: white; }
+    .layer-database h4 { color: #166534; }
+    .layer-database p { color: #15803d; }
+    .layer-devops { background: #f3e8ff; }
+    .layer-devops .layer-icon { background: #a855f7; color: white; }
+    .layer-devops h4 { color: #581c87; }
+    .layer-devops p { color: #7e22ce; }
+
+    /* ---- SECTION 2: HTML ---- */
+    .html-demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .html-demo-grid { grid-template-columns: 1fr; } }
+    .html-snippet-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .html-snippet-card .snippet-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      background: #f3f4f6;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .html-snippet-card .snippet-render { padding: 12px; }
+    code {
+      font-family: 'Courier New', monospace;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      color: #1a1a2e;
+    }
+    pre {
+      background: #1a1a2e;
+      color: #e5e7eb;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    pre .tag-color { color: #4f8ef7; }
+    pre .attr-color { color: #f59e0b; }
+    pre .val-color { color: #86efac; }
+    pre .text-color { color: #e5e7eb; }
+
+    /* ---- SECTION 3: CSS ---- */
+    .css-demo-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .css-prop-table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .css-prop-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); }
+    .css-prop-table tr:last-child td { border-bottom: none; }
+    .css-prop-table td:first-child { color: var(--accent); font-family: monospace; }
+    /* Live CSS demo boxes */
+    .box-model-demo {
+      display: inline-block;
+      margin: 8px;
+      padding: 20px;
+      border: 4px solid #4f8ef7;
+      border-radius: 4px;
+      background: var(--accent-light);
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .hover-demo {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--accent);
+      color: white;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 8px 0;
+    }
+    .hover-demo:hover {
+      background: #1a4fa8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79,142,247,0.3);
+    }
+    .flex-demo {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0;
+    }
+    .flex-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: white;
+    }
+
+    /* ---- SECTION 4: BOOTSTRAP ---- */
+    .bs-component-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .bs-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ---- SECTION 5: JAVASCRIPT ---- */
+    .js-demo-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .js-output {
+      background: #1a1a2e;
+      color: #86efac;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      min-height: 40px;
+    }
+    .js-btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .js-btn:hover { background: #1a4fa8; }
+    .counter-display {
+      font-size: 3rem;
+      font-family: 'DM Serif Display', serif;
+      color: var(--accent);
+      text-align: center;
+      padding: 1rem 0;
+    }
+    .todo-input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+    .todo-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .todo-input:focus { border-color: var(--accent); }
+    .todo-list { list-style: none; padding: 0; }
+    .todo-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+    }
+    .todo-list li.done { text-decoration: line-through; color: var(--muted); }
+    .todo-del { background: none; border: none; cursor: pointer; color: #ef4444; font-size: 1rem; padding: 0 4px; }
+
+    /* FOOTER */
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Sanskriti Thapa</a>
+    <ul class="nav-links">
+      <li><a href="#fullstack">Full Stack</a></li>
+      <li><a href="#html">HTML</a></li>
+      <li><a href="#css">CSS</a></li>
+      <li><a href="#bootstrap">Bootstrap</a></li>
+      <li><a href="#javascript">JavaScript</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">CET138 · Full Stack Development · Assignment 1</p>
+  <h1>Hello, I'm<br><em>Sanskriti Thapa</em></h1>
+  <p>An ePortfolio demonstrating my understanding of full stack web development technologies, from HTML structure to interactive JavaScript.</p>
+  <div class="hero-tags">
+    <span class="tag">Full Stack Dev</span>
+    <span class="tag">HTML5</span>
+    <span class="tag">CSS3</span>
+    <span class="tag">Bootstrap 5</span>
+    <span class="tag">JavaScript</span>
+  </div>
+</header>
+
+<!-- SECTION 1: FULL STACK -->
+<section class="section-wrapper" id="fullstack">
+  <p class="section-number">01</p>
+  <h2 class="section-title">What is Full Stack Development?</h2>
+  <p class="section-intro">Full stack development refers to the practice of working across all layers of a web application — from what the user sees to how data is stored and served.</p>
+
+  <div class="explanation-card">
+    <h3>Overview</h3>
+    <p>A <strong>full stack developer</strong> is someone who can build both the <em>frontend</em> (client-side) and <em>backend</em> (server-side) of a web application. The term "stack" refers to the collection of technologies used together to create a complete product.</p>
+    <br>
+    <p>The three core layers are:</p>
+    <ul style="margin-top: 0.5rem;">
+      <li><strong>Frontend</strong> — what users see and interact with (HTML, CSS, JavaScript)</li>
+      <li><strong>Backend</strong> — the server logic that processes requests (Node.js, Python, PHP)</li>
+      <li><strong>Database</strong> — where data is stored and retrieved (MySQL, MongoDB)</li>
+    </ul>
+    <br>
+    <p>Popular full stack combinations include the <strong>MEAN stack</strong> (MongoDB, Express, Angular, Node.js) and the <strong>LAMP stack</strong> (Linux, Apache, MySQL, PHP).</p>
+  </div>
+
+  <div class="demo-card">
+    <div class="demo-label">Live Demo — The Full Stack Architecture</div>
+    <div class="demo-body">
+      <p style="font-size:0.9rem; color:var(--muted); margin-bottom:1rem;">This diagram shows how each layer of a full stack web application relates to the others:</p>
+      <div class="stack-diagram">
+        <div class="stack-layer layer-frontend">
+          <div class="layer-icon">🖥️</div>
+          <div class="layer-info">
+            <h4>Frontend (Client Side)</h4>
+            <p>HTML · CSS · Bootstrap · JavaScript — What the user sees in their browser</p>
+          </div>
+        </div>
+        <div style="text-align:center; font-size:1.2rem; color:var(--muted);">↕ HTTP Requests &amp; Responses</div>
+        <div class="stack-layer layer-backend">
+          <div class="layer-icon">⚙️</div>
+          <div class="layer-info">
+            <h4>Backend (Server Side)</h4>
+            <p>Node.js · Express · PHP · Python — Processes business logic and API calls</p>
+          </div>
+        </div>
+        <div style="text-align:center; font-size:1.2rem; color:var(--muted);">↕ Queries &amp; Results</div>
+        <div class="stack-layer layer-database">
+          <div class="layer-icon">🗄️</div>
+          <div class="layer-info">
+            <h4>Database</h4>
+            <p>MySQL · MongoDB · PostgreSQL — Stores and retrieves application data</p>
+          </div>
+        </div>
+        <div style="text-align:center; font-size:1.2rem; color:var(--muted);">↕ Deployment</div>
+        <div class="stack-layer layer-devops">
+          <div class="layer-icon">☁️</div>
+          <div class="layer-info">
+            <h4>DevOps / Hosting</h4>
+            <p>GitHub · AWS · Netlify — Deploys and manages the live application</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: HTML -->
+<section class="section-wrapper" id="html">
+  <p class="section-number">02</p>
+  <h2 class="section-title">HTML</h2>
+  <p class="section-intro">HTML (HyperText Markup Language) is the standard language for creating web pages. It defines the structure and content of a page using a system of elements and tags.</p>
+
+  <div class="explanation-card">
+    <h3>Key Concepts</h3>
+    <p>HTML uses <strong>tags</strong> (e.g. <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;div&gt;</code>) to mark up content. Tags usually come in pairs — an opening tag and a closing tag. HTML5 introduced semantic elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code> that give meaning to page structure, improving accessibility and SEO.</p>
+    <br>
+    <ul>
+      <li><strong>Semantic HTML</strong> — Tags that describe the purpose of content (e.g. <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>)</li>
+      <li><strong>Forms</strong> — Collect user input using <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code></li>
+      <li><strong>Tables</strong> — Display tabular data using <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code></li>
+      <li><strong>Links &amp; Media</strong> — <code>&lt;a&gt;</code> for links, <code>&lt;img&gt;</code> for images, <code>&lt;video&gt;</code> for video</li>
+    </ul>
+  </div>
+
+  <div class="demo-card">
+    <div class="demo-label">Live Demo — HTML Elements in Action</div>
+    <div class="demo-body">
+      <div class="html-demo-grid">
+        <!-- Headings -->
+        <div class="html-snippet-card">
+          <div class="snippet-title">Heading tags</div>
+          <div class="snippet-render">
+            <h1 style="font-size:1.6rem;margin:0 0 4px;">Heading 1</h1>
+            <h2 style="font-size:1.3rem;margin:0 0 4px;">Heading 2</h2>
+            <h3 style="font-size:1.1rem;margin:0 0 4px;">Heading 3</h3>
+            <p style="font-size:0.85rem;color:var(--muted);margin:0;">Uses: &lt;h1&gt; → &lt;h6&gt;</p>
+          </div>
+        </div>
+        <!-- Lists -->
+        <div class="html-snippet-card">
+          <div class="snippet-title">Ordered &amp; Unordered lists</div>
+          <div class="snippet-render" style="display:flex;gap:1rem;">
+            <div>
+              <p style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">&lt;ul&gt;</p>
+              <ul style="padding-left:1rem;font-size:0.9rem;margin:0;">
+                <li>HTML</li><li>CSS</li><li>JS</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:0.8rem;color:var(--muted);margin-bottom:4px;">&lt;ol&gt;</p>
+              <ol style="padding-left:1rem;font-size:0.9rem;margin:0;">
+                <li>Plan</li><li>Build</li><li>Deploy</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <!-- Table -->
+        <div class="html-snippet-card">
+          <div class="snippet-title">Table</div>
+          <div class="snippet-render">
+            <table style="width:100%;font-size:0.85rem;border-collapse:collapse;">
+              <thead>
+                <tr style="background:var(--accent-light);">
+                  <th style="padding:4px 8px;text-align:left;">Name</th>
+                  <th style="padding:4px 8px;text-align:left;">Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:4px 8px;border-top:1px solid var(--border);">Sanskriti</td><td style="padding:4px 8px;border-top:1px solid var(--border);">Developer</td></tr>
+                <tr><td style="padding:4px 8px;border-top:1px solid var(--border);">Alice</td><td style="padding:4px 8px;border-top:1px solid var(--border);">Designer</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Form -->
+        <div class="html-snippet-card">
+          <div class="snippet-title">Form elements</div>
+          <div class="snippet-render">
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:0.88rem;">
+              <input type="text" placeholder="Your name" style="padding:6px 10px;border:1px solid var(--border);border-radius:5px;font-size:0.85rem;outline:none;" />
+              <select style="padding:6px 10px;border:1px solid var(--border);border-radius:5px;font-size:0.85rem;">
+                <option>HTML</option><option>CSS</option>
+              </select>
+              <button class="js-btn" style="font-size:0.82rem;padding:6px 14px;">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;">
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.5rem;">Semantic page structure example:</p>
+        <pre><span class="tag-color">&lt;header&gt;</span><span class="text-color">  Site navigation &amp; logo  </span><span class="tag-color">&lt;/header&gt;</span>
+<span class="tag-color">&lt;main&gt;</span>
+  <span class="tag-color">&lt;section&gt;</span>
+    <span class="tag-color">&lt;h1&gt;</span><span class="text-color">Page Title</span><span class="tag-color">&lt;/h1&gt;</span>
+    <span class="tag-color">&lt;p&gt;</span><span class="text-color">Content goes here.</span><span class="tag-color">&lt;/p&gt;</span>
+  <span class="tag-color">&lt;/section&gt;</span>
+<span class="tag-color">&lt;/main&gt;</span>
+<span class="tag-color">&lt;footer&gt;</span><span class="text-color">  Footer content  </span><span class="tag-color">&lt;/footer&gt;</span></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: CSS -->
+<section class="section-wrapper" id="css">
+  <p class="section-number">03</p>
+  <h2 class="section-title">CSS</h2>
+  <p class="section-intro">CSS (Cascading Style Sheets) controls the visual presentation of HTML elements — including layout, colour, typography, spacing, and animations.</p>
+
+  <div class="explanation-card">
+    <h3>Key Concepts</h3>
+    <p>CSS works by <strong>selecting</strong> HTML elements and applying <strong>style rules</strong> to them. Styles cascade — meaning more specific rules override more general ones. CSS supports powerful layout systems like <strong>Flexbox</strong> and <strong>CSS Grid</strong>, and allows <strong>responsive design</strong> through media queries.</p>
+    <br>
+    <ul>
+      <li><strong>Selectors</strong> — Target elements by tag, class (<code>.classname</code>), or id (<code>#idname</code>)</li>
+      <li><strong>Box Model</strong> — Every element has margin, border, padding, and content</li>
+      <li><strong>Flexbox</strong> — One-dimensional layout (rows or columns)</li>
+      <li><strong>Grid</strong> — Two-dimensional layout system</li>
+      <li><strong>Transitions &amp; Animations</strong> — Smooth visual effects</li>
+    </ul>
+  </div>
+
+  <div class="demo-card">
+    <div class="demo-label">Live Demo — CSS Properties</div>
+    <div class="demo-body">
+
+      <!-- Box Model -->
+      <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.5rem;">The Box Model</p>
+      <div style="background:#f9fafb;border-radius:8px;padding:1rem;margin-bottom:1.25rem;text-align:center;">
+        <div style="display:inline-block;background:#fef3c7;padding:16px;border:3px dashed #f59e0b;border-radius:4px;">
+          <span style="font-size:0.78rem;color:#92400e;">Margin</span>
+          <div style="background:#fde68a;padding:12px;border:3px solid #d97706;border-radius:2px;margin-top:6px;">
+            <span style="font-size:0.78rem;color:#78350f;">Border</span>
+            <div style="background:var(--accent-light);padding:12px;border:2px dashed #4f8ef7;margin-top:4px;border-radius:2px;">
+              <span style="font-size:0.78rem;color:#1a4fa8;">Padding</span>
+              <div style="background:#4f8ef7;color:white;padding:8px;margin-top:4px;font-size:0.8rem;border-radius:2px;">Content</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flexbox -->
+      <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.5rem;">Flexbox Layout</p>
+      <div class="flex-demo" style="margin-bottom:1.25rem;">
+        <div class="flex-box" style="background:#4f8ef7;">1</div>
+        <div class="flex-box" style="background:#f59e0b;">2</div>
+        <div class="flex-box" style="background:#22c55e;">3</div>
+        <div class="flex-box" style="background:#a855f7;">4</div>
+      </div>
+      <pre style="margin-bottom:1.25rem;"><span class="attr-color">.container</span> { <span class="tag-color">display</span>: <span class="val-color">flex</span>; <span class="tag-color">gap</span>: <span class="val-color">8px</span>; }</pre>
+
+      <!-- Hover transition -->
+      <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.5rem;">Transition &amp; Hover Effect</p>
+      <div>
+        <div class="hover-demo">Hover over me!</div>
+      </div>
+      <pre style="margin-top:0.75rem;"><span class="attr-color">.btn</span> { <span class="tag-color">transition</span>: <span class="val-color">all 0.3s ease</span>; }
+<span class="attr-color">.btn:hover</span> { <span class="tag-color">transform</span>: <span class="val-color">translateY(-2px)</span>; }</pre>
+
+      <!-- Colours and text -->
+      <p style="font-size:0.85rem;font-weight:500;margin-bottom:0.5rem;">Colour &amp; Typography</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0.75rem;">
+        <div style="width:50px;height:50px;border-radius:8px;background:#4f8ef7;"></div>
+        <div style="width:50px;height:50px;border-radius:8px;background:#f59e0b;"></div>
+        <div style="width:50px;height:50px;border-radius:8px;background:#22c55e;"></div>
+        <div style="width:50px;height:50px;border-radius:8px;background:#ef4444;"></div>
+        <div style="width:50px;height:50px;border-radius:8px;background:#a855f7;"></div>
+      </div>
+      <pre><span class="attr-color">h1</span> { <span class="tag-color">color</span>: <span class="val-color">#1a1a2e</span>; <span class="tag-color">font-size</span>: <span class="val-color">2rem</span>; <span class="tag-color">font-weight</span>: <span class="val-color">700</span>; }
+<span class="attr-color">p</span>  { <span class="tag-color">color</span>: <span class="val-color">#6b7280</span>; <span class="tag-color">line-height</span>: <span class="val-color">1.7</span>; }</pre>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: BOOTSTRAP -->
+<section class="section-wrapper" id="bootstrap">
+  <p class="section-number">04</p>
+  <h2 class="section-title">Bootstrap Framework</h2>
+  <p class="section-intro">Bootstrap is a popular open-source CSS framework that provides pre-built, responsive components — making it faster to build professional-looking websites without writing CSS from scratch.</p>
+
+  <div class="explanation-card">
+    <h3>Key Concepts</h3>
+    <p>Bootstrap uses a <strong>12-column grid system</strong> to create flexible, responsive layouts. It provides ready-made components like buttons, cards, modals, navbars, alerts, and forms that look great on any device. Bootstrap also uses <strong>utility classes</strong> like <code>mt-3</code> (margin top), <code>text-center</code>, <code>d-flex</code> to style elements directly in HTML.</p>
+    <br>
+    <ul>
+      <li><strong>Grid</strong> — <code>col-md-6</code> spans half the page on medium+ screens</li>
+      <li><strong>Components</strong> — Pre-built buttons, cards, navbars, modals, alerts</li>
+      <li><strong>Utilities</strong> — Classes for spacing, colour, text, display</li>
+      <li><strong>Responsive</strong> — Mobile-first design built in with breakpoints (sm, md, lg, xl)</li>
+    </ul>
+  </div>
+
+  <div class="demo-card">
+    <div class="demo-label">Live Demo — Bootstrap Components</div>
+    <div class="demo-body">
+
+      <!-- Grid -->
+      <p class="bs-label">Bootstrap Grid (12 columns)</p>
+      <div class="container-fluid mb-4 p-0">
+        <div class="row g-2">
+          <div class="col-12 col-md-6">
+            <div style="background:var(--accent-light);border:1px dashed var(--accent);border-radius:6px;padding:10px;text-align:center;font-size:0.85rem;color:var(--accent);">col-md-6</div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div style="background:var(--accent-light);border:1px dashed var(--accent);border-radius:6px;padding:10px;text-align:center;font-size:0.85rem;color:var(--accent);">col-md-6</div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div style="background:#fef3c7;border:1px dashed #f59e0b;border-radius:6px;padding:10px;text-align:center;font-size:0.85rem;color:#92400e;">col-md-4</div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div style="background:#fef3c7;border:1px dashed #f59e0b;border-radius:6px;padding:10px;text-align:center;font-size:0.85rem;color:#92400e;">col-md-4</div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div style="background:#fef3c7;border:1px dashed #f59e0b;border-radius:6px;padding:10px;text-align:center;font-size:0.85rem;color:#92400e;">col-md-4</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <p class="bs-label">Bootstrap Buttons</p>
+      <div class="d-flex flex-wrap gap-2 mb-4">
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-outline-primary">Outline</button>
+      </div>
+
+      <!-- Alerts -->
+      <p class="bs-label">Bootstrap Alerts</p>
+      <div class="mb-4">
+        <div class="alert alert-success" role="alert" style="font-size:0.88rem;padding:0.6rem 1rem;">✅ Your form was submitted successfully!</div>
+        <div class="alert alert-warning" role="alert" style="font-size:0.88rem;padding:0.6rem 1rem;">⚠️ Please fill in all required fields.</div>
+        <div class="alert alert-danger" role="alert" style="font-size:0.88rem;padding:0.6rem 1rem;">❌ An error occurred. Please try again.</div>
+      </div>
+
+      <!-- Card -->
+      <p class="bs-label">Bootstrap Card</p>
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6">
+          <div class="card" style="border:1px solid var(--border);">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size:1rem;">Profile Card</h5>
+              <p class="card-text" style="font-size:0.88rem;color:var(--muted);">Bootstrap cards are flexible containers for content, images, and actions.</p>
+              <a href="#" class="btn btn-sm btn-primary">Learn more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="card" style="border:1px solid var(--border);">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size:1rem;">Skill Card</h5>
+              <p class="card-text" style="font-size:0.88rem;color:var(--muted);">Cards can be arranged in a responsive Bootstrap grid using column classes.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badge + Progress -->
+      <p class="bs-label">Badges &amp; Progress</p>
+      <div class="mb-3">
+        <span class="badge bg-primary me-1">HTML</span>
+        <span class="badge bg-success me-1">CSS</span>
+        <span class="badge bg-warning text-dark me-1">Bootstrap</span>
+        <span class="badge bg-info text-dark">JavaScript</span>
+      </div>
+      <div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:4px;">HTML</p>
+        <div class="progress mb-2" style="height:8px;"><div class="progress-bar" style="width:90%"></div></div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:4px;">CSS</p>
+        <div class="progress mb-2" style="height:8px;"><div class="progress-bar bg-success" style="width:80%"></div></div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:4px;">JavaScript</p>
+        <div class="progress" style="height:8px;"><div class="progress-bar bg-warning" style="width:70%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: JAVASCRIPT -->
+<section class="section-wrapper" id="javascript">
+  <p class="section-number">05</p>
+  <h2 class="section-title">JavaScript</h2>
+  <p class="section-intro">JavaScript is a programming language that adds interactivity and dynamic behaviour to web pages. It runs directly in the browser and can manipulate HTML, respond to events, and communicate with servers.</p>
+
+  <div class="explanation-card">
+    <h3>Key Concepts</h3>
+    <p>JavaScript is the only language that runs natively in browsers. It uses the <strong>DOM (Document Object Model)</strong> to access and modify HTML elements in real time. JavaScript supports <strong>variables</strong>, <strong>functions</strong>, <strong>loops</strong>, <strong>conditionals</strong>, and <strong>events</strong> to build interactive experiences.</p>
+    <br>
+    <ul>
+      <li><strong>Variables</strong> — Store data using <code>let</code>, <code>const</code>, or <code>var</code></li>
+      <li><strong>Functions</strong> — Reusable blocks of code</li>
+      <li><strong>DOM Manipulation</strong> — <code>document.getElementById()</code>, <code>innerHTML</code>, <code>style</code></li>
+      <li><strong>Events</strong> — React to user actions (<code>onclick</code>, <code>onkeyup</code>, <code>onsubmit</code>)</li>
+      <li><strong>Arrays &amp; Objects</strong> — Store and organise multiple values</li>
+    </ul>
+  </div>
+
+  <div class="demo-card">
+    <div class="demo-label">Live Demo — JavaScript Interactivity</div>
+    <div class="demo-body">
+
+      <!-- Counter -->
+      <p class="bs-label">Counter (Variables + DOM Manipulation)</p>
+      <div style="background:#f9fafb;border-radius:8px;padding:1rem;margin-bottom:1.5rem;text-align:center;">
+        <div class="counter-display" id="counter-val">0</div>
+        <div>
+          <button class="js-btn" onclick="changeCount(-1)">− Decrease</button>
+          <button class="js-btn" onclick="changeCount(1)">+ Increase</button>
+          <button class="js-btn" style="background:#6b7280;" onclick="resetCount()">Reset</button>
+        </div>
+      </div>
+
+      <!-- Colour changer -->
+      <p class="bs-label">Dynamic Style Changer (DOM + Events)</p>
+      <div style="background:#f9fafb;border-radius:8px;padding:1rem;margin-bottom:1.5rem;">
+        <div id="colour-box" style="height:80px;border-radius:8px;background:#4f8ef7;transition:background 0.4s;display:flex;align-items:center;justify-content:center;color:white;font-weight:500;font-size:0.9rem;margin-bottom:10px;">Click a colour below</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="js-btn" style="background:#4f8ef7;" onclick="changeColour('#4f8ef7')">Blue</button>
+          <button class="js-btn" style="background:#f59e0b;" onclick="changeColour('#f59e0b')">Amber</button>
+          <button class="js-btn" style="background:#22c55e;" onclick="changeColour('#22c55e')">Green</button>
+          <button class="js-btn" style="background:#ef4444;" onclick="changeColour('#ef4444')">Red</button>
+          <button class="js-btn" style="background:#a855f7;" onclick="changeColour('#a855f7')">Purple</button>
+        </div>
+      </div>
+
+      <!-- To-do list -->
+      <p class="bs-label">To-Do List (Arrays + DOM + Events)</p>
+      <div style="background:#f9fafb;border-radius:8px;padding:1rem;margin-bottom:1.5rem;">
+        <div class="todo-input-row">
+          <input type="text" id="todo-input" class="todo-input" placeholder="Add a task..." onkeydown="if(event.key==='Enter')addTodo()" />
+          <button class="js-btn" style="margin:0;" onclick="addTodo()">Add</button>
+        </div>
+        <ul class="todo-list" id="todo-list"></ul>
+        <p id="todo-empty" style="font-size:0.85rem;color:var(--muted);text-align:center;">No tasks yet. Add one above!</p>
+      </div>
+
+      <!-- Code snippet -->
+      <p class="bs-label">Example Code</p>
+      <pre><span class="tag-color">let</span> <span class="val-color">count</span> = <span class="attr-color">0</span>;
+
+<span class="tag-color">function</span> <span class="val-color">increase</span>() {
+  count++;
+  document.<span class="tag-color">getElementById</span>(<span class="val-color">'display'</span>).innerHTML = count;
+}
+
+document.<span class="tag-color">getElementById</span>(<span class="val-color">'btn'</span>)
+  .<span class="tag-color">addEventListener</span>(<span class="val-color">'click'</span>, increase);</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Sanskriti Thapa · CET138 Full Stack Development · Assignment 1</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Counter
+  let count = 0;
+  function changeCount(n) {
+    count += n;
+    document.getElementById('counter-val').textContent = count;
+  }
+  function resetCount() {
+    count = 0;
+    document.getElementById('counter-val').textContent = 0;
+  }
+
+  // Colour changer
+  function changeColour(hex) {
+    const box = document.getElementById('colour-box');
+    box.style.background = hex;
+    box.textContent = 'Colour: ' + hex;
+  }
+
+  // To-do list
+  const todos = [];
+  function addTodo() {
+    const input = document.getElementById('todo-input');
+    const val = input.value.trim();
+    if (!val) return;
+    todos.push({ text: val, done: false });
+    input.value = '';
+    renderTodos();
+  }
+  function toggleTodo(i) {
+    todos[i].done = !todos[i].done;
+    renderTodos();
+  }
+  function deleteTodo(i) {
+    todos.splice(i, 1);
+    renderTodos();
+  }
+  function renderTodos() {
+    const list = document.getElementById('todo-list');
+    const empty = document.getElementById('todo-empty');
+    list.innerHTML = '';
+    if (todos.length === 0) { empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    todos.forEach((t, i) => {
+      const li = document.createElement('li');
+      if (t.done) li.classList.add('done');
+      li.innerHTML = `<span onclick="toggleTodo(${i})" style="cursor:pointer;flex:1;">${t.text}</span><button class="todo-del" onclick="deleteTodo(${i})">✕</button>`;
+      list.appendChild(li);
+    });
+  }
+</script>
+</body>
+</html>
